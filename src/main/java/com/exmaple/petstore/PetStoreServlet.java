@@ -2,6 +2,7 @@ package com.exmaple.petstore;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -20,9 +21,7 @@ public class PetStoreServlet extends HttpServlet {
 	/**
 	 * The PETSTORE database.
 	 */
-	private static final Map<Integer, String> PETSTORE_DATABASE = Map.of(1, "name of pet1 is tommy", 2, "sheba", 3,
-			"Jacob");
-
+	private static final Map<Integer, String> PETSTORE_DATABASE = new HashMap<>();
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -44,5 +43,24 @@ public class PetStoreServlet extends HttpServlet {
 		}
 		
 	}
+	
+	protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+
+        String petID = request.getParameter("petID");
+        String petname = request.getParameter("petname");
+         
+        System.out.println("PetID: " + petID);
+        System.out.println("Petname: " + petname);
+        PETSTORE_DATABASE.put(Integer.parseInt(petID), petname);
+        PrintWriter writer = response.getWriter();
+         
+        String htmlRespone = "<html>";
+        htmlRespone += "<h2>Pet ID: " + petID + "<br/>";      
+        htmlRespone += "Pet Name is: " + petname + "</h2>";    
+        htmlRespone += "</html>";
+        writer.println(htmlRespone);
+         
+    }
 
 }
