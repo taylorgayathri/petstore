@@ -41,5 +41,17 @@ public class PetStoreServletTest {
 		assertEquals("expected parsed integer.", -1, output); 
 	
 	}
+	
+	@Test
+	public void testGetIntegerParameter_boolenInteger() {
+		// setup 
+		
+		// Execute
+		int output=PetStoreServlet.getIntegerParameter("12.34");
+		
+		// Assert
+		assertEquals("expected parsed integer.", -1 , output); 
+	
+	}
 
 }

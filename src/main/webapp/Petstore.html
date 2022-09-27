@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html>
+<style>
+table, th, td {
+  border: solid black;
+}
+
+</style>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<form name="submitForm" method="post" action="pet">
-    PET ID: <input type="text" name="petID"/> <br/>
-    PET NAME: <input type="text" name="petname"/> <br/>
-    <input type="submit" value="submit" />
-</form>
+
+<table style="width:500px" id="Courses">
+<tr> 
+<th> PET ID </th>
+<th> PET NAME </th>
+<th> Action</th>
+</tr>
+</table>
+<button onclick="addRow()">Add pet info</button>
+ <script>
+        function addRow() {  
+            var table = document.getElementById("Courses");  
+            var rowCount = table.rows.length;  
+            var row = table.insertRow(rowCount);  
+            //Column 1  
+            var cell1 = row.insertCell(0);  
+            var element1 = document.createElement("input"); 
+            element1.type="text";
+            cell1.appendChild(element1);
+            //Column 2    
+            var cell2 = row.insertCell(1);  
+            cell2.innerHTML = rowCount + 1;  
+            //Column 3  
+            var cell3 = row.insertCell(2);  
+            var element3 = document.createElement("input");  
+            element3.type = "button";  
+            var btnName = "button" + (rowCount + 0);  
+            element3.name = btnName;  
+            element3.setAttribute('value', 'Delete'); // or element1.value = "button";  
+            element3.onclick = function () { removeRow(btnName); }  
+            cell1.appendChild(element3); 
+        }  
+        function removeRow(btnName) {  
+            try {  
+                var table = document.getElementById('Courses');  
+                var rowCount = table.rows.length;  
+                for (var i = 0; i < rowCount; i++) {  
+                    var row = table.rows[i];  
+                    var rowrowObj = row.cells[0].childNodes[0];  
+                    if (rowObj.name == btnName) {  
+                        table.deleteRow(i);  
+                        rowCount--;  
+                    }  
+                }  
+            }  
+            catch (e) {  
+                alert(e);  
+            } 
+        }
+    </script>
+
+
 </body>
 </html>
